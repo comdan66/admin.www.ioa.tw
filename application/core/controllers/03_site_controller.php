@@ -1,4 +1,4 @@
-<?php if (!defined ('BASEPATH')) exit ('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * @author      OA Wu <comdan66@gmail.com>
@@ -17,7 +17,7 @@ class Site_controller extends Oa_controller {
          ->set_content_path ('content', 'site')
          ->set_public_path ('public')
 
-         ->set_title ('iOA 後台')
+         ->set_title ("OA's CI")
 
          ->_add_meta ()
          ->_add_css ()
@@ -30,9 +30,7 @@ class Site_controller extends Oa_controller {
   }
 
   private function _add_meta () {
-    return $this->add_meta (array ('name' => 'robots', 'content' => 'noindex,nofollow'))
-                ->add_meta (array ('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui'))
-                ;
+    return $this;
   }
 
   private function _add_css () {
@@ -40,9 +38,8 @@ class Site_controller extends Oa_controller {
   }
 
   private function _add_js () {
-    return $this->add_js (res_url ('res', 'js', 'jquery_v1.10.2', 'jquery-1.10.2.min.js'))
-                ->add_js (res_url ('res', 'js', 'jquery-rails_d2015_03_09', 'jquery_ujs.js'))
-                ->add_js (res_url ('res', 'js', 'imgLiquid_v0.9.944', 'imgLiquid-min.js'))
+    return $this->add_js (res_url ('res', 'javascript', 'jquery_v1.10.2', 'jquery-1.10.2.min.js'))
+                ->add_js (res_url ('res', 'javascript', 'jquery-rails_d2015_03_09', 'jquery_ujs.js'))
                 ;
   }
 }

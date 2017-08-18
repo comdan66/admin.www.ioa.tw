@@ -14,10 +14,6 @@ application/logs/*
 application/config/database.php
 application/config/setting/facebook.php
 application/config/setting/role.php
-application/config/setting/deploy.php
-application/config/system/s3.php
-application/config/system/orm_uploader.php
-application/config/system/static.php
 
 temp/*
 
@@ -26,10 +22,11 @@ upload/*
 assets/*
 
 /vendor/*
-/api/*
 /cmd
 /_ENV.php
 
 system/cmd/.sass-cache/*
 system/cmd/node_modules/*
 system/cmd/npm-debug.log
+
+composer.lock

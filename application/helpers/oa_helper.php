@@ -1,4 +1,4 @@
-<?php if (!defined ('BASEPATH')) exit ('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * @author      OA Wu <comdan66@gmail.com>
@@ -239,10 +239,9 @@ if (!function_exists ('conditions')) {
   }
 }
 if (!function_exists ('column_array')) {
-  function column_array ($objects, $key, $callback = null) {
-    return array_map (function ($object) use ($key, $callback) {
-      $t = !is_array ($object) ? is_object ($object) ? $object->$key : $object : $object[$key];
-      return $callback && is_callable ($callback) ? $callback ($t) : $t;
+  function column_array ($objects, $key) {
+    return array_map (function ($object) use ($key) {
+      return !is_array ($object) ? is_object ($object) ? $object->$key : $object : $object[$key];
     }, $objects);
   }
 }

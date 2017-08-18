@@ -1,11 +1,10 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 /**
  * @author      OA Wu <comdan66@gmail.com>
  * @copyright   Copyright (c) 2017 OA Wu Design
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
-
 
 class Migration_Add_user_roles extends CI_Migration {
   public function up () {

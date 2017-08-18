@@ -1,4 +1,4 @@
-<?php if (!defined ('BASEPATH')) exit ('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * @author      OA Wu <comdan66@gmail.com>
@@ -20,7 +20,7 @@ class Admin_controller extends Oa_controller {
          ->set_content_path ('content', 'admin')
          ->set_public_path ('public')
 
-         ->set_title ('iOA 後台')
+         ->set_title (Cfg::setting ('company', 'name') . '管理系統')
 
          ->_add_meta ()
          ->_add_css ()
@@ -32,7 +32,6 @@ class Admin_controller extends Oa_controller {
     if (file_exists ($path = FCPATH . implode (DIRECTORY_SEPARATOR, array_merge ($this->get_views_path (), $this->get_public_path (), array ('icon_admin.css')))) && is_readable ($path))
       $this->add_css (res_url (implode ('/', array_merge ($this->get_views_path (), $this->get_public_path (), array ('icon_admin.css')))));
   }
-
   protected function _get_pagination ($configs) {
     $this->load->library ('pagination');
     return $this->pagination->initialize (array_merge (array ('num_links' => 3, 'uri_segment' => 0, 'base_url' => '', 'page_query_string' => false, 'first_link' => '', 'last_link' => '', 'prev_link' => '', 'next_link' => '', 'full_tag_open' => '<ul>', 'full_tag_close' => '</ul>', 'first_tag_open' => '<li class="f icon-first_page">', 'first_tag_close' => '</li>', 'prev_tag_open' => '<li class="p icon-keyboard_arrow_left">', 'prev_tag_close' => '</li>', 'num_tag_open' => '<li>', 'num_tag_close' => '</li>', 'cur_tag_open' => '<li class="active"><a href="#">', 'cur_tag_close' => '</a></li>', 'next_tag_open' => '<li class="n icon-keyboard_arrow_right">', 'next_tag_close' => '</li>', 'last_tag_open' => '<li class="l icon-last_page">', 'last_tag_close' => '</li>'), $configs))->create_links ();
