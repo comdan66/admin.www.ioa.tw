@@ -19,7 +19,13 @@ class User extends OaModel {
   static $belongs_to = array (
   );
 
+  private static $current = '';
+
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {
     parent::__construct ($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+  }
+  public static function current () {
+    if (self::$current !== '') return self::$current;
+    return self::$current = ($token = Session::getData ('user_token')) ? User::find_by_token ($token) : null;
   }
 }
