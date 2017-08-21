@@ -6,7 +6,7 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-class Article_tags extends Admin_controller {
+class Tags extends Admin_controller {
   private $uri_1 = null;
   private $obj = null;
   private $icon = null;
@@ -18,12 +18,12 @@ class Article_tags extends Admin_controller {
     if (!User::current ()->in_roles (array ('member')))
       return redirect_message (array ('admin'), array ('_fd' => '您的權限不足，或者頁面不存在。'));
     
-    $this->uri_1 = 'admin/article-tags';
+    $this->uri_1 = 'admin/tags';
     $this->icon = 'icon-price-tags';
     $this->title = '文章分類';
 
     if (in_array ($this->uri->rsegments (2, 0), array ('edit', 'update', 'destroy')))
-      if (!(($id = $this->uri->rsegments (3, 0)) && ($this->obj = ArticleTag::find ('one', array ('conditions' => array ('id = ?', $id))))))
+      if (!(($id = $this->uri->rsegments (3, 0)) && ($this->obj = Tag::find ('one', array ('conditions' => array ('id = ?', $id))))))
         return redirect_message (array ($this->uri_1), array ('_fd' => '找不到該筆資料。'));
 
     $this->add_param ('uri_1', $this->uri_1)
@@ -37,7 +37,7 @@ class Article_tags extends Admin_controller {
       );
 
     $configs = array_merge (explode ('/', $this->uri_1), array ('%s'));
-    $objs = conditions ($searches, $configs, $offset, 'ArticleTag', array ('order' => 'id DESC'));
+    $objs = conditions ($searches, $configs, $offset, 'Tag', array ('order' => 'id DESC'));
 
     return $this->load_view (array (
         'objs' => $objs,
@@ -63,7 +63,7 @@ class Article_tags extends Admin_controller {
       return '';
     };
 
-    if (($msg = $validation ($posts)) || (!(ArticleTag::transaction (function () use (&$obj, $posts) { return verifyCreateOrm ($obj = ArticleTag::create (array_intersect_key ($posts, ArticleTag::table ()->columns))); }) && $obj) && ($msg = '資料庫處理錯誤！')))
+    if (($msg = $validation ($posts)) || (!(Tag::transaction (function () use (&$obj, $posts) { return verifyCreateOrm ($obj = Tag::create (array_intersect_key ($posts, Tag::table ()->columns))); }) && $obj) && ($msg = '資料庫處理錯誤！')))
       return redirect_message (array ($this->uri_1, 'add'), array ('_fd' => $msg, 'posts' => $posts));
 
     return redirect_message (array ($this->uri_1), array ('_fi' => '新增成功！'));
@@ -96,7 +96,7 @@ class Article_tags extends Admin_controller {
       foreach ($columns as $column => $value)
         $obj->$column = $value;
 
-    if (!ArticleTag::transaction (function () use ($obj, $posts) { return $obj->save (); }))
+    if (!Tag::transaction (function () use ($obj, $posts) { return $obj->save (); }))
       return redirect_message (array ($this->uri_1, $obj->id, 'edit'), array ('_fd' => '更新失敗！', 'posts' => $posts));
 
     return redirect_message (array ($this->uri_1), array ('_fi' => '更新成功！'));
@@ -104,7 +104,7 @@ class Article_tags extends Admin_controller {
   public function destroy () {
     $obj = $this->obj;
 
-    if (!ArticleTag::transaction (function () use ($obj) { return $obj->destroy (); }))
+    if (!Tag::transaction (function () use ($obj) { return $obj->destroy (); }))
       return redirect_message (array ($this->uri_1), array ('_fd' => '刪除失敗！'));
 
     return redirect_message (array ($this->uri_1), array ('_fi' => '刪除成功！'));

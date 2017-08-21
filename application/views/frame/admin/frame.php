@@ -50,8 +50,13 @@
           <span class='icon-u'>後台管理</span>
           <div>
             <a class='icon-home<?php echo ($url = base_url ('admin')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>後台首頁</a>
-            <a class='icon-price-tags<?php echo ($url = base_url ('admin', 'article-tags')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>文章分類</a>
-            <a class='icon-list<?php echo ($url = base_url ('admin', 'articles')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>文章列表</a>
+            <a class='icon-price-tags<?php echo ($url = base_url ('admin', 'tags')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>標籤列表</a>
+            <a class='icon-home<?php echo ($url = base_url ('admin', 'homes')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>首頁文章</a>
+
+            <a class='icon-t<?php echo ($url = base_url ('admin', 'devs')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>開發心得</a>
+            <a class='icon-b<?php echo ($url = base_url ('admin', 'lives')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>生活紀錄</a>
+            <a class='icon-g<?php echo ($url = base_url ('admin', 'unboxings')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>開箱文章</a>
+            <a class='icon-images<?php echo ($url = base_url ('admin', 'albums')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>個人相簿</a>
           </div>
         </div>
 <?php } ?>

@@ -9,6 +9,10 @@ Route::get ('admin', 'admin/main@index');
 
 Route::group ('admin', function () {
   Route::resourcePagination (array ('banners'), 'banners');
-  Route::resourcePagination (array ('article_tags'), 'article_tags');
-  Route::resourcePagination (array ('articles'), 'articles');
+  Route::resourcePagination (array ('tags'), 'tags');
+  Route::resourcePagination (array ('homes'), 'homes');
+  Route::resourcePagination (array ('devs'), 'devs');
+  Route::resourcePagination (array ('lives'), 'lives');
+  Route::resourcePagination (array ('unboxings'), 'unboxings');
+  Route::resourcePagination (array ('albums'), 'albums');
 });

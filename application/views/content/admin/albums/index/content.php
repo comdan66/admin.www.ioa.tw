@@ -53,7 +53,6 @@
       <tr>
         <th width='60' class='center'>上架</th>
         <th width='70' class='center'>封面</th>
-        <th width='130' class='left'>作者</th>
         <th width='200' class='left'>標題<?php echo listSort ($uri_1, 'title');?></th>
         <th class='left'>內容</th>
         <th width='80' class='center'>PV<?php echo listSort ($uri_1, 'pv');?></th>
@@ -65,16 +64,21 @@
         <tr>
           <td class='center'>
             <label class='switch ajax' data-column='status' data-url='<?php echo base_url ($uri_1, 'status', $obj->id);?>'>
-              <input type='checkbox'<?php echo $obj->status == Banner::STATUS_2 ? ' checked' : '';?> />
+              <input type='checkbox'<?php echo $obj->status == Article::STATUS_3 ? ' checked' : '';?> />
               <span></span>
             </label>
           </td>
           <td class='center'>
             <div class='oaips'>
               <div class='oaip _ic' data-src='<?php echo $obj->cover->url ();?>'><img src='<?php echo $obj->cover->url ('450x180c');?>' /></div>
+
+        <?php if ($obj->images) {
+                foreach ($obj->images as $image) { ?>
+                  <div class='oaip _ic' data-src='<?php echo $image->name->url ();?>'><img src='<?php echo $image->name->url ('');?>' /></div>
+          <?php }
+              }?>
             </div>
           </td>
-          <td class='left'><?php echo $obj->user->name;?></td>
           <td class='left'><?php echo $obj->mini_title (15);?></td>
           <td class='left'><?php echo $obj->mini_content (40);?></td>
           <td class='center'><?php echo $obj->pv;?></td>

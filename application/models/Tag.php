@@ -6,16 +6,16 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-class ArticleTagMapping extends OaModel {
+class Tag extends OaModel {
 
-  static $table_name = 'article_tag_mappings';
+  static $table_name = 'tags';
 
   static $has_one = array (
   );
 
   static $has_many = array (
-    array ('tags',     'class_name' => 'Tag'),
-    array ('articles', 'class_name' => 'Article'),
+    array ('mappings', 'class_name' => 'ArticleTagMapping'),
+    array ('articles', 'class_name' => 'Article', 'through' => 'mappings', 'conditions' => array ('status = ?', Article::STATUS_3)),
   );
 
   static $belongs_to = array (
@@ -27,6 +27,11 @@ class ArticleTagMapping extends OaModel {
   public function destroy () {
     if (!isset ($this->id)) return false;
     
+    if ($this->mappings)
+      foreach ($this->mappings as $mapping)
+        if (!$mapping->destroy ())
+          return false;
+
     return $this->delete ();
   }
 }

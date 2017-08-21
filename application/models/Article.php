@@ -15,8 +15,9 @@ class Article extends OaModel {
 
   static $has_many = array (
     array ('mappings', 'class_name' => 'ArticleTagMapping'),
-    array ('tags',     'class_name' => 'ArticleTag', 'through' => 'mappings'),
-    array ('sources',  'class_name' => 'ArticleSource')
+    array ('tags',     'class_name' => 'Tag', 'through' => 'mappings'),
+    array ('sources',  'class_name' => 'ArticleSource'),
+    array ('images',  'class_name' => 'ArticleImage')
   );
 
   static $belongs_to = array (
@@ -25,10 +26,26 @@ class Article extends OaModel {
 
   const STATUS_1 = 1;
   const STATUS_2 = 2;
+  const STATUS_3 = 3;
 
   static $statusNames = array (
-    self::STATUS_1 => '下架',
-    self::STATUS_2 => '上架',
+    self::STATUS_1 => '刪除',
+    self::STATUS_2 => '下架',
+    self::STATUS_3 => '上架',
+  );
+
+  const TYPE_1 = 1;
+  const TYPE_2 = 2;
+  const TYPE_3 = 3;
+  const TYPE_4 = 4;
+  const TYPE_5 = 5;
+
+  static $typeNames = array (
+    self::TYPE_1 => '首頁',
+    self::TYPE_2 => '實作',
+    self::TYPE_3 => '生活',
+    self::TYPE_4 => '開箱',
+    self::TYPE_5 => '相簿',
   );
 
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {
@@ -45,18 +62,22 @@ class Article extends OaModel {
     return $length ? mb_strimwidth (remove_ckedit_tag ($this->content), 0, $length, '…','UTF-8') : remove_ckedit_tag ($this->content);
   }
   public function destroy () {
-    if (!isset ($this->id)) return false;
+    if (!(isset ($this->id) && isset ($this->status))) return false;
     
-    if ($this->mappings)
-      foreach ($this->mappings as $mapping)
-        if (!$mapping->destroy ())
-          return false;
+    $this->status = Article::STATUS_1;
 
-    if ($this->sources)
-      foreach ($this->sources as $source)
-        if (!$source->destroy ())
-          return false;
+    return $this->save ();
 
-    return $this->delete ();
+    // if ($this->mappings)
+    //   foreach ($this->mappings as $mapping)
+    //     if (!$mapping->destroy ())
+    //       return false;
+
+    // if ($this->sources)
+    //   foreach ($this->sources as $source)
+    //     if (!$source->destroy ())
+    //       return false;
+
+    // return $this->delete ();
   }
 }

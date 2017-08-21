@@ -6,10 +6,10 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-class Migration_Add_article_tags extends CI_Migration {
+class Migration_Add_tags extends CI_Migration {
   public function up () {
     $this->db->query (
-      "CREATE TABLE `article_tags` (
+      "CREATE TABLE `tags` (
         `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
         `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名稱',
         PRIMARY KEY (`id`)
@@ -18,7 +18,7 @@ class Migration_Add_article_tags extends CI_Migration {
   }
   public function down () {
     $this->db->query (
-      "DROP TABLE `article_tags`;"
+      "DROP TABLE `tags`;"
     );
   }
 }

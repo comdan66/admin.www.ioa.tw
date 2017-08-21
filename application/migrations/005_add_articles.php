@@ -11,12 +11,17 @@ class Migration_Add_articles extends CI_Migration {
     $this->db->query (
       "CREATE TABLE `articles` (
         `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-        `user_id` int(11) unsigned NOT NULL DEFAULT 0 COMMENT 'User ID(作者)',
 
         `cover` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '封面',
+
         `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '標題',
+        `bio` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '關於',
         `content` text NOT NULL COMMENT '內容',
-        `status` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '上下架，1 下架，2 上架',
+        `date_at` date DEFAULT NULL COMMENT '文章日期',
+
+        `type` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '類型，1 首頁，2 實作，3 生活，4 開箱文，5 相簿',
+        `status` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '狀態，1 刪除，2 下架，3 上架',
+
         `pv` int(11) unsigned NOT NULL DEFAULT 0 COMMENT 'Page view',
 
         `updated_at` datetime NOT NULL DEFAULT '" . date ('Y-m-d H:i:s') . "' COMMENT '更新時間',
