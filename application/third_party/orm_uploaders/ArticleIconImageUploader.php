@@ -8,9 +8,6 @@
 
 class ArticleIconImageUploader extends OrmImageUploader {
 
-  public function d4Url () {
-    return res_url ('res', 'image', 'uploader.jpg');
-  }
   public function getVersions () {
     return array (
         '' => array (),
