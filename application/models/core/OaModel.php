@@ -35,15 +35,18 @@ class OaModel extends ActiveRecordModel {
         '_' => $var,
       ) : $var;
   }
-  protected function getBackup () {
+  public function to_api () {
+    // $this->getBackup ()
+  }
+  public function getBackup ($api = false) {
     $that = $this;
-    return array_combine ($k = array_keys ($this->table ()->columns), array_map (function ($u) use ($that) {
+    return array_combine ($k = array_keys ($this->table ()->columns), array_map (function ($u) use ($that, $api) {
       switch (gettype ($that->$u)) {
         case 'integer': case 'string': case 'double':
           return $that->$u; break;
         
         default:
-          if ($that->$u instanceof OrmUploader) return (string) $that->$u;
+          if ($that->$u instanceof OrmUploader) return !$api ? (string) $that->$u : (array_combine ($keys = array_map (function ($key) { return $key === '' ? 'ori' : $key;}, array_keys ($that->$u->getVersions ())), array_map (function ($key) use ($that, $u) { return $that->$u->url ($key === 'ori' ? '' : $key); }, $keys)));
           if ($that->$u instanceof ActiveRecord\DateTime) return (string) $that->$u->format ('Y-m-d H:i:s');
           if ($that->$u === null) return null;
           

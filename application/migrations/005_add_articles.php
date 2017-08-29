@@ -12,6 +12,7 @@ class Migration_Add_articles extends CI_Migration {
       "CREATE TABLE `articles` (
         `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 
+        `icon` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '小封面',
         `cover` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '封面',
 
         `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '標題',
@@ -21,6 +22,7 @@ class Migration_Add_articles extends CI_Migration {
 
         `type` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '類型，1 首頁，2 實作，3 生活，4 開箱文，5 相簿',
         `status` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '狀態，1 刪除，2 下架，3 上架',
+        `timeline` tinyint(4) unsigned NOT NULL DEFAULT 1 COMMENT '里程碑，1 不要，2 要',
 
         `pv` int(11) unsigned NOT NULL DEFAULT 0 COMMENT 'Page view',
 

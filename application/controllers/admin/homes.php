@@ -67,6 +67,8 @@ class Homes extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['type'] = Article::TYPE_1;
+    $posts['date_at'] = date ('Y-m-d');
+    $posts['timeline'] = Article::TIMELINE_1;
     $posts['content'] = OAInput::post ('content', false);
     $cover = OAInput::file ('cover');
 

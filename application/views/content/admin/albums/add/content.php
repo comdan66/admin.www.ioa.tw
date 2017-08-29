@@ -11,6 +11,14 @@
       </label>
     </div>
 
+    <div class='row min'>
+      <b class='need'>是否里程碑</b>
+      <label class='switch'>
+        <input type='checkbox' name='timeline'<?php echo (isset ($posts['timeline']) ? $posts['timeline'] : Article::TIMELINE_1) == Article::TIMELINE_2 ? ' checked' : '';?> value='<?php echo Article::TIMELINE_2;?>' />
+        <span></span>
+      </label>
+    </div>
+
     <div class='row'>
       <b class='need'><?php echo $title;?>標題</b>
       <input type='text' name='title' value='<?php echo isset ($posts['title']) ? $posts['title'] : '';?>' placeholder='請輸入<?php echo $title;?>標題..' maxlength='200' pattern='.{1,200}' required title='輸入<?php echo $title;?>標題!' autofocus />
@@ -19,6 +27,11 @@
     <div class='row'>
       <b class='need'><?php echo $title;?>副標題</b>
       <input type='text' name='bio' value='<?php echo isset ($posts['bio']) ? $posts['bio'] : '';?>' placeholder='請輸入<?php echo $title;?>副標題..' maxlength='200' pattern='.{1,200}' required title='輸入<?php echo $title;?>副標題!' />
+    </div>
+
+    <div class='row'>
+      <b class='need'><?php echo $title;?>時間</b>
+      <input type='date' name='date_at' value='<?php echo isset ($posts['date_at']) ? $posts['date_at'] : date ('Y-m-d');?>' placeholder='請選擇<?php echo $title;?>時間..' maxlength='200' pattern='.{1,200}' required title='選擇<?php echo $title;?>時間!' />
     </div>
     
     <div class='row'>
@@ -55,10 +68,6 @@
         </div>
 <?php }?>
 
-    <div class='row'>
-      <b class='need'><?php echo $title;?>時間</b>
-      <input type='date' name='date_at' value='<?php echo isset ($posts['date_at']) ? $posts['date_at'] : date ('Y-m-d');?>' placeholder='請選擇<?php echo $title;?>時間..' maxlength='200' pattern='.{1,200}' required title='選擇<?php echo $title;?>時間!' />
-    </div>
 
     <div class='row'>
       <b class='need'><?php echo $title;?>內容</b>

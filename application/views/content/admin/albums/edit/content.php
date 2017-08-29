@@ -12,6 +12,13 @@
       </label>
     </div>
 
+    <div class='row min'>
+      <b class='need'>是否里程碑</b>
+      <label class='switch'>
+        <input type='checkbox' name='timeline'<?php echo (isset ($posts['timeline']) ? $posts['timeline'] : $obj->timeline) == Article::TIMELINE_2 ? ' checked' : '';?> value='<?php echo Article::TIMELINE_2;?>' />
+        <span></span>
+      </label>
+    </div>
 
     <div class='row'>
       <b class='need'><?php echo $title;?>標題</b>
@@ -22,6 +29,11 @@
       <b class='need'><?php echo $title;?>副標題</b>
       <input type='text' name='bio' value='<?php echo isset ($posts['bio']) ? $posts['bio'] : $obj->bio;?>' placeholder='請輸入<?php echo $title;?>副標題..' maxlength='200' pattern='.{1,200}' required title='輸入<?php echo $title;?>副標題!' />
     </div>
+
+    <div class='row'>
+      <b class='need'><?php echo $title;?>時間</b>
+      <input type='date' name='date_at' value='<?php echo isset ($posts['date_at']) ? $posts['date_at'] : ($obj->date_at ? $obj->date_at->format ('Y-m-d') : date ('Y-m-d'));?>' placeholder='請選擇<?php echo $title;?>時間..' maxlength='200' pattern='.{1,200}' required title='選擇<?php echo $title;?>時間!' />
+    </div>
     
     <div class='row'>
       <b class='need' data-title='預覽僅示意，未按比例。'><?php echo $title;?>封面</b>
@@ -29,12 +41,6 @@
         <img src='<?php echo $obj->cover->url ();?>' />
         <input type='file' name='cover' />
       </div>
-    </div>
-
-
-    <div class='row'>
-      <b class='need'><?php echo $title;?>時間</b>
-      <input type='date' name='date_at' value='<?php echo isset ($posts['date_at']) ? $posts['date_at'] : $obj->date_at->format ('Y-m-d');?>' placeholder='請選擇<?php echo $title;?>時間..' maxlength='200' pattern='.{1,200}' required title='選擇<?php echo $title;?>時間!' />
     </div>
 
     <div class='row'>

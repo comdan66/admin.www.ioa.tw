@@ -6,7 +6,7 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-class Lives extends Admin_controller {
+class Blogs extends Admin_controller {
   private $uri_1 = null;
   private $obj = null;
   private $icon = null;
@@ -18,12 +18,12 @@ class Lives extends Admin_controller {
     if (!User::current ()->in_roles (array ('member')))
       return redirect_message (array ('admin'), array ('_fd' => '您的權限不足，或者頁面不存在。'));
     
-    $this->uri_1 = 'admin/lives';
+    $this->uri_1 = 'admin/blogs';
     $this->icon = 'icon-b';
     $this->title = '生活文章';
 
-    if (in_array ($this->uri->rsegments (2, 0), array ('edit', 'update', 'destroy', 'status', 'show')))
-      if (!(($id = $this->uri->rsegments (3, 0)) && ($this->obj = Article::find ('one', array ('conditions' => array ('id = ? AND status != ? AND type = ?', $id, Article::STATUS_1, Article::TYPE_3))))))
+    if (in_array ($this->uri->rsegments (2, 0), array ('edit', 'update', 'destroy', 'status', 'show', 'timeline')))
+      if (!(($id = $this->uri->rsegments (3, 0)) && ($this->obj = Article::find ('one', array ('conditions' => array ('id = ? AND status != ? AND type = ?', $id, Article::STATUS_1, Article::TYPE_4))))))
         return redirect_message (array ($this->uri_1), array ('_fd' => '找不到該筆資料。'));
 
     $this->add_param ('uri_1', $this->uri_1)
@@ -43,7 +43,7 @@ class Lives extends Admin_controller {
 
     $configs = array_merge (explode ('/', $this->uri_1), array ('%s'));
     $objs = conditions ($searches, $configs, $offset, 'Article', array ('order' => 'id DESC'), function ($conditions) {
-      OaModel::addConditions ($conditions, 'status != ? AND type = ?', Article::STATUS_1, Article::TYPE_3);
+      OaModel::addConditions ($conditions, 'status != ? AND type = ?', Article::STATUS_1, Article::TYPE_4);
       return $conditions;
     });
 
@@ -76,16 +76,19 @@ class Lives extends Admin_controller {
       return redirect_message (array ($this->uri_1, 'add'), array ('_fd' => '非 POST 方法，錯誤的頁面請求。'));
 
     $posts = OAInput::post ();
-    $posts['type'] = Article::TYPE_3;
+    $posts['type'] = Article::TYPE_4;
     $posts['content'] = OAInput::post ('content', false);
+    $icon = OAInput::file ('icon');
     $cover = OAInput::file ('cover');
 
-    $validation = function (&$posts, &$cover) {
+    $validation = function (&$posts, &$icon, &$cover) {
       if (!(isset ($posts['status']) && is_string ($posts['status']) && is_numeric ($posts['status'] = trim ($posts['status'])) && in_array ($posts['status'], array_keys (Article::$statusNames)))) $posts['status'] = Article::STATUS_2;
+      if (!(isset ($posts['timeline']) && is_string ($posts['timeline']) && is_numeric ($posts['timeline'] = trim ($posts['timeline'])) && in_array ($posts['timeline'], array_keys (Article::$timelineNames)))) $posts['timeline'] = Article::TIMELINE_1;
       if (!(isset ($posts['title']) && is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '「' . $this->title . '標題」格式錯誤！';
       if (!(isset ($posts['bio']) && is_string ($posts['bio']) && ($posts['bio'] = trim ($posts['bio'])))) return '「' . $this->title . '副標題」格式錯誤！';
       if (!(isset ($posts['date_at']) && is_string ($posts['date_at']) && is_date ($posts['date_at'] = trim ($posts['date_at'])))) return '「' . $this->title . '時間」格式錯誤！';
 
+      if (!(isset ($icon) && is_upload_image_format ($icon, array ('gif', 'jpeg', 'jpg', 'png')))) return '「' . $this->title . '小圖」格式錯誤！';
       if (!(isset ($cover) && is_upload_image_format ($cover, array ('gif', 'jpeg', 'jpg', 'png')))) return '「' . $this->title . '封面」格式錯誤！';
       if (!(isset ($posts['content']) && is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '「' . $this->title . '內容」格式錯誤！';
 
@@ -101,7 +104,7 @@ class Lives extends Admin_controller {
       return '';
     };
 
-    if (($msg = $validation ($posts, $cover)) || (!(Article::transaction (function () use (&$obj, $posts, $cover) { if (!verifyCreateOrm ($obj = Article::create (array_intersect_key ($posts, Article::table ()->columns)))) return false; return $obj->cover->put ($cover); }) && $obj) && ($msg = '資料庫處理錯誤！')))
+    if (($msg = $validation ($posts, $icon, $cover)) || (!(Article::transaction (function () use (&$obj, $posts, $icon, $cover) { if (!verifyCreateOrm ($obj = Article::create (array_intersect_key ($posts, Article::table ()->columns)))) return false; return $obj->icon->put ($icon) && $obj->cover->put ($cover); }) && $obj) && ($msg = '資料庫處理錯誤！')))
       return redirect_message (array ($this->uri_1, 'add'), array ('_fd' => $msg, 'posts' => $posts));
 
     if ($posts['tag_ids'])
@@ -140,14 +143,18 @@ class Lives extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['content'] = OAInput::post ('content', false);
+    $icon = OAInput::file ('icon');
     $cover = OAInput::file ('cover');
 
-    $validation = function (&$posts, &$cover, $obj) {
+    $validation = function (&$posts, &$icon, &$cover, $obj) {
       if (isset ($posts['status']) && !(is_string ($posts['status']) && is_numeric ($posts['status'] = trim ($posts['status'])) && in_array ($posts['status'], array_keys (Article::$statusNames)))) $posts['status'] = Article::STATUS_2;
+      if (isset ($posts['timeline']) && !(is_string ($posts['timeline']) && is_numeric ($posts['timeline'] = trim ($posts['timeline'])) && in_array ($posts['timeline'], array_keys (Article::$timelineNames)))) $posts['timeline'] = Article::TIMELINE_1;
       if (isset ($posts['title']) && !(is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '「' . $this->title . '標題」格式錯誤！';
       if (isset ($posts['bio']) && !(is_string ($posts['bio']) && ($posts['bio'] = trim ($posts['bio'])))) return '「' . $this->title . '副標題」格式錯誤！';
       if (isset ($posts['date_at']) && !(is_string ($posts['date_at']) && is_date ($posts['date_at'] = trim ($posts['date_at'])))) return '「' . $this->title . '時間」格式錯誤！';
 
+      if (!((string)$obj->icon || isset ($icon))) return '「' . $this->title . '封面」格式錯誤！';
+      if (isset ($icon) && !(is_upload_image_format ($icon, array ('gif', 'jpeg', 'jpg', 'png')))) return '「' . $this->title . '封面」格式錯誤！';
       if (!((string)$obj->cover || isset ($cover))) return '「' . $this->title . '封面」格式錯誤！';
       if (isset ($cover) && !(is_upload_image_format ($cover, array ('gif', 'jpeg', 'jpg', 'png')))) return '「' . $this->title . '封面」格式錯誤！';
       if (isset ($posts['content']) && !(is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '「' . $this->title . '內容」格式錯誤！';
@@ -164,14 +171,14 @@ class Lives extends Admin_controller {
       return '';
     };
 
-    if ($msg = $validation ($posts, $cover, $obj))
+    if ($msg = $validation ($posts, $icon, $cover, $obj))
       return redirect_message (array ($this->uri_1, $obj->id, 'edit'), array ('_fd' => $msg, 'posts' => $posts));
 
     if ($columns = array_intersect_key ($posts, $obj->table ()->columns))
       foreach ($columns as $column => $value)
         $obj->$column = $value;
 
-    if (!Article::transaction (function () use ($obj, $posts, $cover) { if (!$obj->save ()) return false; if ($cover && !$obj->cover->put ($cover)) return false; return true; }))
+    if (!Article::transaction (function () use ($obj, $posts, $icon, $cover) { if (!$obj->save ()) return false; if ($icon && !$obj->icon->put ($icon)) return false; if ($cover && !$obj->cover->put ($cover)) return false; return true; }))
       return redirect_message (array ($this->uri_1, $obj->id, 'edit'), array ('_fd' => '資料庫處理錯誤！', 'posts' => $posts));
 
     $ori_ids = column_array ($obj->mappings, 'tag_id');
@@ -225,5 +232,29 @@ class Lives extends Admin_controller {
       return $this->output_error_json ('資料庫處理錯誤！');
 
     return $this->output_json ($obj->status == Article::STATUS_3);
+  }
+  public function timeline () {
+    $obj = $this->obj;
+
+    if (!$this->has_post ())
+      return $this->output_error_json ('非 POST 方法，錯誤的頁面請求。');
+
+    $posts = OAInput::post ();
+
+    $validation = function (&$posts) {
+      return !(isset ($posts['timeline']) && is_string ($posts['timeline']) && is_numeric ($posts['timeline'] = trim ($posts['timeline'])) && ($posts['timeline'] = $posts['timeline'] ? Article::TIMELINE_2 : Article::TIMELINE_1) && in_array ($posts['timeline'], array_keys (Article::$timelineNames))) ? '「設定里程」發生錯誤！' : '';
+    };
+
+    if ($msg = $validation ($posts))
+      return $this->output_error_json ($msg);
+
+    if ($columns = array_intersect_key ($posts, $obj->table ()->columns))
+      foreach ($columns as $column => $value)
+        $obj->$column = $value;
+
+    if (!Article::transaction (function () use ($obj) { return $obj->save (); }))
+      return $this->output_error_json ('資料庫處理錯誤！');
+
+    return $this->output_json ($obj->timeline == Article::TIMELINE_2);
   }
 }

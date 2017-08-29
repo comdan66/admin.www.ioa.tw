@@ -24,4 +24,8 @@ class ArticleImage extends OaModel {
 
     OrmImageUploader::bind ('name', 'ArticleImageNameImageUploader');
   }
+  public function destroy () {
+    if (!isset ($this->id)) return false;
+    return $this->delete ();
+  }
 }

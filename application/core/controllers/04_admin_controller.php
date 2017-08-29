@@ -30,7 +30,7 @@ class Admin_controller extends Oa_controller {
          ;
 
     if (file_exists ($path = FCPATH . implode (DIRECTORY_SEPARATOR, array_merge ($this->get_views_path (), $this->get_public_path (), array ('icon_admin.css')))) && is_readable ($path))
-      $this->add_css (res_url (implode ('/', array_merge ($this->get_views_path (), $this->get_public_path (), array ('icon_admin.css')))));
+      $this->add_css (base_url (implode ('/', array_merge ($this->get_views_path (), $this->get_public_path (), array ('icon_admin.css')))));
   }
   protected function _get_pagination ($configs) {
     $this->load->library ('pagination');
@@ -53,6 +53,7 @@ class Admin_controller extends Oa_controller {
                 ->add_js (res_url ('res', 'js', 'jquery-timeago_v1.3.1', 'jquery.timeago.js'))
                 ->add_js (res_url ('res', 'js', 'jquery-timeago_v1.3.1', 'locales', 'jquery.timeago.zh-TW.js'))
                 ->add_js (res_url ('res', 'js', 'imgLiquid_v0.9.944', 'imgLiquid-min.js'))
+                ->add_js (res_url ('res', 'js', 'autosize_v3.0.8', 'autosize.min.js'))
                 ->add_js (res_url ('res', 'js', 'ckeditor_d2015_05_18', 'ckeditor.js'), false)
                 ->add_js (res_url ('res', 'js', 'ckeditor_d2015_05_18', 'config.js'), false)
                 ->add_js (res_url ('res', 'js', 'ckeditor_d2015_05_18', 'adapters', 'jquery.js'), false)

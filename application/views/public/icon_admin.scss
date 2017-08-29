@@ -6,11 +6,11 @@
   @include font-smoothing(antialiased);
 }
 
-.icon-v:before {
-  content: "\e924";
+.icon-copyright:before {
+  content: "\e928";
 }
-.icon-t:before {
-  content: "\e925";
+.icon-star-full:before {
+  content: "\e927";
 }
 .icon-r:before {
   content: "\e114";
@@ -146,6 +146,12 @@
 }
 .icon-profile2:before {
   content: "\e923";
+}
+.icon-v:before {
+  content: "\e924";
+}
+.icon-t:before {
+  content: "\e925";
 }
 .icon-file-text2:before {
   content: "\e926";

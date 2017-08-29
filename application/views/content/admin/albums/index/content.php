@@ -52,6 +52,7 @@
     <thead>
       <tr>
         <th width='60' class='center'>上架</th>
+        <th width='60' class='center'>里程</th>
         <th width='70' class='center'>封面</th>
         <th width='200' class='left'>標題<?php echo listSort ($uri_1, 'title');?></th>
         <th class='left'>內容</th>
@@ -69,12 +70,18 @@
             </label>
           </td>
           <td class='center'>
+            <label class='switch ajax' data-column='timeline' data-url='<?php echo base_url ($uri_1, 'timeline', $obj->id);?>'>
+              <input type='checkbox'<?php echo $obj->timeline == Article::TIMELINE_2 ? ' checked' : '';?> />
+              <span></span>
+            </label>
+          </td>
+          <td class='center'>
             <div class='oaips'>
-              <div class='oaip _ic' data-src='<?php echo $obj->cover->url ();?>'><img src='<?php echo $obj->cover->url ('450x180c');?>' /></div>
+              <div class='oaip _ic' data-src='<?php echo $obj->cover->url ();?>'><img src='<?php echo $obj->cover->url ('c630x315');?>' /></div>
 
         <?php if ($obj->images) {
                 foreach ($obj->images as $image) { ?>
-                  <div class='oaip _ic' data-src='<?php echo $image->name->url ();?>'><img src='<?php echo $image->name->url ('');?>' /></div>
+                  <div class='oaip _ic' data-src='<?php echo $image->name->url ();?>'><img src='<?php echo $image->name->url ('w800');?>' /></div>
           <?php }
               }?>
             </div>

@@ -29,7 +29,6 @@
       </div>
     </div>
 
-
     <div class='row'>
       <b class='need'><?php echo $title;?>內容</b>
       <textarea class='cke' name='content' placeholder='請輸入<?php echo $title;?>內容..'><?php echo isset ($posts['content']) ? $posts['content'] : '';?></textarea>

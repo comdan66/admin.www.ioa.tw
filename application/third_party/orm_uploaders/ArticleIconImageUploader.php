@@ -6,7 +6,7 @@
  * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
  */
 
-class BannerCoverImageUploader extends OrmImageUploader {
+class ArticleIconImageUploader extends OrmImageUploader {
 
   public function d4Url () {
     return res_url ('res', 'image', 'uploader.jpg');
@@ -14,7 +14,7 @@ class BannerCoverImageUploader extends OrmImageUploader {
   public function getVersions () {
     return array (
         '' => array (),
-        '800w' => array ('resize', 800, 800, 'width')
+        'c300x300' => array ('adaptiveResizeQuadrant', 300, 300, 'c'),
       );
   }
 }

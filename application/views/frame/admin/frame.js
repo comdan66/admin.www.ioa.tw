@@ -56,7 +56,7 @@ $(function () {
   };
   window.fns.mutiImg ($('.drop_imgs'));
 
-  
+  autosize ($('.autosize'));
   $('textarea.cke').ckeditor ({
     filebrowserUploadUrl: $('#filebrowserUploadUrl').val (),
     filebrowserImageBrowseUrl: $('#filebrowserImageBrowseUrl').val (),

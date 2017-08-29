@@ -70,7 +70,7 @@
           </td>
           <td class='center'>
             <div class='oaips'>
-              <div class='oaip _ic' data-src='<?php echo $obj->cover->url ();?>'><img src='<?php echo $obj->cover->url ('450x180c');?>' /></div>
+              <div class='oaip _ic' data-src='<?php echo $obj->cover->url ();?>'><img src='<?php echo $obj->cover->url ('c630x315');?>' /></div>
             </div>
           </td>
           <td class='left'><?php echo $obj->mini_title (15);?></td>

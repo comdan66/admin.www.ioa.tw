@@ -12,7 +12,6 @@
       </label>
     </div>
 
-
     <div class='row'>
       <b class='need'><?php echo $title;?>標題</b>
       <input type='text' name='title' value='<?php echo isset ($posts['title']) ? $posts['title'] : $obj->title;?>' placeholder='請輸入<?php echo $title;?>標題..' maxlength='200' pattern='.{1,200}' required title='輸入<?php echo $title;?>標題!' autofocus />

@@ -47,16 +47,28 @@
 
 <?php if (User::current ()->in_roles (array ('member'))) { ?>
         <div class='group'>
-          <span class='icon-u'>後台管理</span>
+          <span class='icon-u'>一般管理</span>
           <div>
             <a class='icon-home<?php echo ($url = base_url ('admin')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>後台首頁</a>
             <a class='icon-price-tags<?php echo ($url = base_url ('admin', 'tags')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>標籤列表</a>
             <a class='icon-home<?php echo ($url = base_url ('admin', 'homes')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>首頁文章</a>
-
+            <a class='icon-copyright<?php echo ($url = base_url ('admin', 'licenses')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>授權聲明</a>
+          </div>
+        </div>
+        <div class='group'>
+          <span class='icon-file-text2'>文章管理</span>
+          <div>
             <a class='icon-t<?php echo ($url = base_url ('admin', 'devs')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>開發心得</a>
-            <a class='icon-b<?php echo ($url = base_url ('admin', 'lives')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>生活紀錄</a>
+            <a class='icon-b<?php echo ($url = base_url ('admin', 'blogs')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>生活紀錄</a>
             <a class='icon-g<?php echo ($url = base_url ('admin', 'unboxings')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>開箱文章</a>
             <a class='icon-images<?php echo ($url = base_url ('admin', 'albums')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>個人相簿</a>
+            <a class='icon-star-full<?php echo ($url = base_url ('admin', 'stars')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>重要事件</a>
+          </div>
+        </div>
+        <div class='group'>
+          <span class='icon-user-secret'>系統管理</span>
+          <div>
+            <a class='icon-loop2<?php echo ($url = base_url ('admin', 'deploys')) && isset ($_url) && ($url == $_url) ? ' show' : '';?>' href='<?php echo $url;?>'>部署紀錄</a>
           </div>
         </div>
 <?php } ?>

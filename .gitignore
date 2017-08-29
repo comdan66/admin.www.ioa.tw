@@ -14,10 +14,12 @@ application/logs/*
 application/config/database.php
 application/config/setting/facebook.php
 application/config/setting/role.php
+application/config/setting/deploy.php
 
 temp/*
 
 upload/*
+api/*
 
 assets/*
 
