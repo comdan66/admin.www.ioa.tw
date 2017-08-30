@@ -6,7 +6,7 @@
     <div class='row min'>
       <b class='need'>是否上架</b>
       <label class='switch'>
-        <input type='checkbox' name='status'<?php echo (isset ($posts['status']) ? $posts['status'] : Article::STATUS_2) == Article::STATUS_3 ? ' checked' : '';?> value='<?php echo Article::STATUS_3;?>' />
+        <input type='checkbox' name='status'<?php echo (isset ($posts['status']) ? $posts['status'] : Article::STATUS_3) == Article::STATUS_3 ? ' checked' : '';?> value='<?php echo Article::STATUS_3;?>' />
         <span></span>
       </label>
     </div>
