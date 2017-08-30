@@ -62,6 +62,7 @@ CKEDITOR.plugins.add( 'dropler', {
             
             var elem = editor.document.createElement('img', {
                 attributes: {
+                    alt: "",
                     src: res.url
                 }
             });
