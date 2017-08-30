@@ -69,8 +69,8 @@ CKEDITOR.plugins.add( 'dropler', {
             var tempImage = new Image();
             tempImage.src = res.url;
             tempImage.onload = function () {
-                if (this.width > 0) elem.setAttribute('width', this.width / 2);
-                if (this.height > 0) elem.setAttribute('height', this.height / 2);
+                if (!(this.width > 0 && this.height > 0)) return ;
+                elem.setAttribute('style', 'width: ' + (this.width / 2) + 'px; height: ' + (this.height / 2) + 'px;');
                 return true;
             };
 
