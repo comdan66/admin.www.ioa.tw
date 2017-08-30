@@ -18,6 +18,7 @@ application/config/setting/deploy.php
 
 application/config/system/s3.php
 application/config/system/orm_uploader.php
+application/config/system/static.php
 
 temp/*
 
