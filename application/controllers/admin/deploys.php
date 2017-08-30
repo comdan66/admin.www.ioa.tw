@@ -52,15 +52,6 @@ class Deploys extends Admin_controller {
         'pagination' => $this->_get_pagination ($configs),
       ));
   }
-  public function show () {
-    UserLog::logRead ($this->icon, '檢視了一項' . $this->title);
-
-    return $this->load_view (array (
-        'obj' => $this->obj,
-        'quota_day' => (int)(strtotime ($this->obj->date) - strtotime (date ('Y-m-d'))) / 86400
-      ));
-  }
-  
   public function add () {
     $posts = Session::getData ('posts', true);
 
