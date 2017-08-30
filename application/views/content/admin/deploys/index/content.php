@@ -64,7 +64,7 @@
           <td class='center' style='color: <?php echo $obj->status == Deploy::STATUS_2 ? 'rgba(34, 164, 136, 1.00)' : 'rgba(195, 55, 42, 1.00)';?>;'><?php echo Deploy::$statusNames[$obj->status];?></td>
           <td class='left'><?php echo $obj->res ('message');?></td>
           <td>
-            <a class='icon-eye' href="<?php echo base_url ($uri_1, $obj->id, 'show');?>"></a>
+            <a class='icon-eye' target='_blank' href="<?php echo $obj->type == Deploy::TYPE_2 ? 'https://www.ioa.tw/' : 'http://staging.www.ioa.tw/';?>"></a>
           </td>
         </tr>
 <?php } ?>
