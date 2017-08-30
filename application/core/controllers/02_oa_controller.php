@@ -158,7 +158,7 @@ class Oa_controller extends Root_controller {
 
     if (!is_readable ($folder_path . $file_name) && !($data = '')) {
       foreach ($temp as $key => $value)
-        $data .= (($file = preg_replace ("/^$bom/", '', preg_replace ("/\/res/", "/res/" . $this->static_file_version, read_file ($path = FCPATH . preg_replace ("|^(" . preg_quote (base_url ('')) . ")|", '', $value))))) ? Cfg::system ('static', 'minify') ? $this->minify->$format->min ($file) : $file : '') . "\n";
+        $data .= (($file = preg_replace ("/^$bom/", '', str_replace ($cfg['url'] . "res", $cfg['url'] . "res/" . $this->static_file_version, read_file ($path = FCPATH . preg_replace ("|^(" . preg_quote (base_url ('')) . ")|", '', $value))))) ? Cfg::system ('static', 'minify') ? $this->minify->$format->min ($file) : $file : '') . "\n";
       write_file ($t = $folder_path . $file_name, $data, 'w+');
 
       
