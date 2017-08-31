@@ -28,7 +28,7 @@ class DeployTool {
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
       }, array_filter ($tags, function ($tag) use ($tag_ids) { return in_array ($tag->id, $tag_ids);})) : array (),
-      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag], 'color' => Article::$mainTagColors[$obj->main_tag]),
+      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag]),
       'sources' => array_map (function ($source) { return $source->getBackup ();}, $obj->sources),
       'content' => preg_replace ('/alt=""/', 'alt="' . $obj->title . '"', preg_replace ('/alt=""\s+src="(https?:\/\/[a-zA-Z_0-9\.]*\/[a-zA-Z_0-9]*\/ckeditor_images\/name\/([0-9]*)\/([0-9]*)\/([0-9]*)\/([0-9]*)\/[a-zA-Z_0-9]*\.[^\"]*)"/', 'alt="" data-pvid="CkeditorImage-$2$3$4$5" src="$1"', $obj->content))
     )); }, $objs)));
@@ -39,7 +39,7 @@ class DeployTool {
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
       }, array_filter ($tags, function ($tag) use ($tag_ids) { return in_array ($tag->id, $tag_ids);})) : array (),
-      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag], 'color' => Article::$mainTagColors[$obj->main_tag]),
+      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag]),
       'sources' => array_map (function ($source) { return $source->getBackup ();}, $obj->sources),
       'content' => preg_replace ('/alt=""/', 'alt="' . $obj->title . '"', preg_replace ('/alt=""\s+src="(https?:\/\/[a-zA-Z_0-9\.]*\/[a-zA-Z_0-9]*\/ckeditor_images\/name\/([0-9]*)\/([0-9]*)\/([0-9]*)\/([0-9]*)\/[a-zA-Z_0-9]*\.[^\"]*)"/', 'alt="" data-pvid="CkeditorImage-$2$3$4$5" src="$1"', $obj->content))
     )); }, $objs)));
@@ -50,7 +50,7 @@ class DeployTool {
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
       }, array_filter ($tags, function ($tag) use ($tag_ids) { return in_array ($tag->id, $tag_ids);})) : array (),
-      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag], 'color' => Article::$mainTagColors[$obj->main_tag]),
+      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag]),
       'sources' => array_map (function ($source) { return $source->getBackup ();}, $obj->sources),
       'content' => preg_replace ('/alt=""/', 'alt="' . $obj->title . '"', preg_replace ('/alt=""\s+src="(https?:\/\/[a-zA-Z_0-9\.]*\/[a-zA-Z_0-9]*\/ckeditor_images\/name\/([0-9]*)\/([0-9]*)\/([0-9]*)\/([0-9]*)\/[a-zA-Z_0-9]*\.[^\"]*)"/', 'alt="" data-pvid="CkeditorImage-$2$3$4$5" src="$1"', $obj->content))
     )); }, $objs)));
@@ -62,7 +62,7 @@ class DeployTool {
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
       }, array_filter ($tags, function ($tag) use ($tag_ids) { return in_array ($tag->id, $tag_ids);})) : array (),
-      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag], 'color' => Article::$mainTagColors[$obj->main_tag]),
+      'tag' => array ('key' => $obj->main_tag, 'title' => Article::$mainTagNames[$obj->main_tag]),
       'sources' => array_map (function ($source) { return $source->getBackup ();}, $obj->sources),
       'images' => array_map (function ($image) { return $image->getBackup (true);}, $obj->images),
       'content' => preg_replace ('/alt=""/', 'alt="' . $obj->title . '"', preg_replace ('/alt=""\s+src="(https?:\/\/[a-zA-Z_0-9\.]*\/[a-zA-Z_0-9]*\/ckeditor_images\/name\/([0-9]*)\/([0-9]*)\/([0-9]*)\/([0-9]*)\/[a-zA-Z_0-9]*\.[^\"]*)"/', 'alt="" data-pvid="CkeditorImage-$2$3$4$5" src="$1"', $obj->content))

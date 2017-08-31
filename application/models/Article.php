@@ -49,15 +49,6 @@ class Article extends OaModel {
     self::MAIN_TAG_6 => '其他',
     self::MAIN_TAG_7 => 'WEB 全端',
   );
-  static $mainTagColors = array (
-    self::MAIN_TAG_1 => '',
-    self::MAIN_TAG_2 => 'rgba(49, 183, 164, 1.00)',
-    self::MAIN_TAG_3 => 'rgba(0, 0, 0, 1.00)',
-    self::MAIN_TAG_4 => 'rgba(0, 0, 0, 1.00)',
-    self::MAIN_TAG_5 => 'rgba(0, 0, 0, 1.00)',
-    self::MAIN_TAG_6 => 'rgba(0, 0, 0, 1.00)',
-    self::MAIN_TAG_7 => 'rgba(0, 0, 0, 1.00)',
-  );
 
   const STATUS_1 = 1;
   const STATUS_2 = 2;
