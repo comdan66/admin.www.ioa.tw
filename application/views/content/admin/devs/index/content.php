@@ -77,7 +77,7 @@
               <span></span>
             </label>
           </td>
-          <td class='center'><?php echo Article::$mainTagNames[$obj->main_tag];?></td>
+          <td class='center' style='color: <?php echo Article::$mainTagColors[$obj->main_tag];?>;'><?php echo Article::$mainTagNames[$obj->main_tag];?></td>
           <td class='center'>
             <div class='oaips'>
               <div class='oaip _ic' data-src='<?php echo $obj->icon->url ();?>'><img src='<?php echo $obj->icon->url ('c300x300');?>' /></div>
