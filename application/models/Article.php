@@ -47,7 +47,7 @@ class Article extends OaModel {
     self::MAIN_TAG_4 => 'iOS',
     self::MAIN_TAG_5 => '前端',
     self::MAIN_TAG_6 => '其他',
-    self::MAIN_TAG_7 => 'WEB 全端',
+    self::MAIN_TAG_7 => '全端',
   );
 
   const STATUS_1 = 1;
