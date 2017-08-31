@@ -38,6 +38,7 @@ class Article extends OaModel {
   const MAIN_TAG_4 = 4;
   const MAIN_TAG_5 = 5;
   const MAIN_TAG_6 = 6;
+  const MAIN_TAG_7 = 7;
 
   static $mainTagNames = array (
     self::MAIN_TAG_1 => '',
@@ -46,6 +47,7 @@ class Article extends OaModel {
     self::MAIN_TAG_4 => 'iOS',
     self::MAIN_TAG_5 => '前端',
     self::MAIN_TAG_6 => '其他',
+    self::MAIN_TAG_7 => 'WEB 全端',
   );
 
   const STATUS_1 = 1;
