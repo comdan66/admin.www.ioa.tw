@@ -53,7 +53,7 @@
       <tr>
         <th width='60' class='center'>上架</th>
         <th width='60' class='center'>里程</th>
-        <th width='60' class='center'>類別</th>
+        <th width='80' class='center'>類別</th>
         <th width='70' class='center'>小圖</th>
         <th width='70' class='center'>封面</th>
         <th width='200' class='left'>標題<?php echo listSort ($uri_1, 'title');?></th>
