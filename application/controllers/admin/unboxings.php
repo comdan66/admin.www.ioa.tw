@@ -77,6 +77,7 @@ class Unboxings extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['type'] = Article::TYPE_5;
+    $posts['case'] = Article::CASE_1;
     $posts['content'] = OAInput::post ('content', false);
     $icon = OAInput::file ('icon');
     $cover = OAInput::file ('cover');

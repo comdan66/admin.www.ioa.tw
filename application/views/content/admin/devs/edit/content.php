@@ -20,6 +20,14 @@
       </label>
     </div>
 
+    <div class='row min'>
+      <b class='need'>是否為接案</b>
+      <label class='switch'>
+        <input type='checkbox' name='case'<?php echo (isset ($posts['case']) ? $posts['case'] : $obj->case) == Article::CASE_2 ? ' checked' : '';?> value='<?php echo Article::CASE_2;?>' />
+        <span></span>
+      </label>
+    </div>
+
     <div class='row'>
       <b class='need'><?php echo $title;?>標題</b>
       <input type='text' name='title' value='<?php echo isset ($posts['title']) ? $posts['title'] : $obj->title;?>' placeholder='請輸入<?php echo $title;?>標題..' maxlength='200' pattern='.{1,200}' required title='輸入<?php echo $title;?>標題!' autofocus />

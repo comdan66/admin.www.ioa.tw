@@ -32,6 +32,14 @@ class Article extends OaModel {
     self::TIMELINE_2 => '要',
   );
 
+  const CASE_1 = 1;
+  const CASE_2 = 2;
+
+  static $caseNames = array (
+    self::CASE_1 => '不是',
+    self::CASE_2 => '是',
+  );
+
   const STATUS_1 = 1;
   const STATUS_2 = 2;
   const STATUS_3 = 3;

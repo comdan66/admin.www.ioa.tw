@@ -18,6 +18,14 @@
         <span></span>
       </label>
     </div>
+    
+    <div class='row min'>
+      <b class='need'>是否為接案</b>
+      <label class='switch'>
+        <input type='checkbox' name='case'<?php echo (isset ($posts['case']) ? $posts['case'] : Article::CASE_1) == Article::CASE_2 ? ' checked' : '';?> value='<?php echo Article::CASE_2;?>' />
+        <span></span>
+      </label>
+    </div>
 
     <div class='row'>
       <b class='need'><?php echo $title;?>標題</b>

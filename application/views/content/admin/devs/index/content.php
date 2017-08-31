@@ -48,11 +48,12 @@
 </div>
 
 <div class='panel'>
-  <table class='table-list w1100'>
+  <table class='table-list w1200'>
     <thead>
       <tr>
         <th width='60' class='center'>上架</th>
         <th width='60' class='center'>里程</th>
+        <th width='60' class='center'>接案</th>
         <th width='70' class='center'>小圖</th>
         <th width='70' class='center'>封面</th>
         <th width='200' class='left'>標題<?php echo listSort ($uri_1, 'title');?></th>
@@ -73,6 +74,12 @@
           <td class='center'>
             <label class='switch ajax' data-column='timeline' data-url='<?php echo base_url ($uri_1, 'timeline', $obj->id);?>'>
               <input type='checkbox'<?php echo $obj->timeline == Article::TIMELINE_2 ? ' checked' : '';?> />
+              <span></span>
+            </label>
+          </td>
+          <td class='center'>
+            <label class='switch ajax' data-column='case' data-url='<?php echo base_url ($uri_1, 'caseon', $obj->id);?>'>
+              <input type='checkbox'<?php echo $obj->case == Article::CASE_2 ? ' checked' : '';?> />
               <span></span>
             </label>
           </td>

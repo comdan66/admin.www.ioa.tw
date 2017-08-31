@@ -68,6 +68,7 @@ class Stars extends Admin_controller {
     $posts = OAInput::post ();
     $posts['bio'] = '';
     $posts['cover'] = '';
+    $posts['case'] = Article::CASE_1;
     $posts['type'] = Article::TYPE_7;
     $posts['timeline'] = Article::TIMELINE_2;
     $posts['content'] = OAInput::post ('content', false);

@@ -68,6 +68,7 @@ class Licenses extends Admin_controller {
     $posts = OAInput::post ();
     $posts['cover'] = '';
     $posts['date_at'] = date ('Y-m-d');
+    $posts['case'] = Article::CASE_1;
     $posts['type'] = Article::TYPE_2;
     $posts['timeline'] = Article::TIMELINE_1;
     $posts['content'] = OAInput::post ('content', false);
