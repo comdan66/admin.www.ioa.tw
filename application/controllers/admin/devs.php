@@ -22,7 +22,7 @@ class Devs extends Admin_controller {
     $this->icon = 'icon-t';
     $this->title = '開發文章';
 
-    if (in_array ($this->uri->rsegments (2, 0), array ('edit', 'update', 'destroy', 'status', 'show', 'timeline', 'caseon')))
+    if (in_array ($this->uri->rsegments (2, 0), array ('edit', 'update', 'destroy', 'status', 'show', 'timeline')))
       if (!(($id = $this->uri->rsegments (3, 0)) && ($this->obj = Article::find ('one', array ('conditions' => array ('id = ? AND status != ? AND type = ?', $id, Article::STATUS_1, Article::TYPE_3))))))
         return redirect_message (array ($this->uri_1), array ('_fd' => '找不到該筆資料。'));
 
@@ -84,7 +84,7 @@ class Devs extends Admin_controller {
     $validation = function (&$posts, &$icon, &$cover) {
       if (!(isset ($posts['status']) && is_string ($posts['status']) && is_numeric ($posts['status'] = trim ($posts['status'])) && in_array ($posts['status'], array_keys (Article::$statusNames)))) $posts['status'] = Article::STATUS_2;
       if (!(isset ($posts['timeline']) && is_string ($posts['timeline']) && is_numeric ($posts['timeline'] = trim ($posts['timeline'])) && in_array ($posts['timeline'], array_keys (Article::$timelineNames)))) $posts['timeline'] = Article::TIMELINE_1;
-      if (!(isset ($posts['case']) && is_string ($posts['case']) && is_numeric ($posts['case'] = trim ($posts['case'])) && in_array ($posts['case'], array_keys (Article::$caseNames)))) $posts['case'] = Article::CASE_1;
+      if (!(isset ($posts['main_tag']) && is_string ($posts['main_tag']) && is_numeric ($posts['main_tag'] = trim ($posts['main_tag'])) && in_array ($posts['main_tag'], array_keys (Article::$mainTagNames)))) $posts['main_tag'] = Article::MAIN_TAG_1;
       if (!(isset ($posts['title']) && is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '「' . $this->title . '標題」格式錯誤！';
       if (!(isset ($posts['bio']) && is_string ($posts['bio']) && ($posts['bio'] = trim ($posts['bio'])))) return '「' . $this->title . '副標題」格式錯誤！';
       if (!(isset ($posts['date_at']) && is_string ($posts['date_at']) && is_date ($posts['date_at'] = trim ($posts['date_at'])))) return '「' . $this->title . '時間」格式錯誤！';
@@ -150,7 +150,7 @@ class Devs extends Admin_controller {
     $validation = function (&$posts, &$icon, &$cover, $obj) {
       if (isset ($posts['status']) && !(is_string ($posts['status']) && is_numeric ($posts['status'] = trim ($posts['status'])) && in_array ($posts['status'], array_keys (Article::$statusNames)))) $posts['status'] = Article::STATUS_2;
       if (isset ($posts['timeline']) && !(is_string ($posts['timeline']) && is_numeric ($posts['timeline'] = trim ($posts['timeline'])) && in_array ($posts['timeline'], array_keys (Article::$timelineNames)))) $posts['timeline'] = Article::TIMELINE_1;
-      if (isset ($posts['case']) && !(is_string ($posts['case']) && is_numeric ($posts['case'] = trim ($posts['case'])) && in_array ($posts['case'], array_keys (Article::$caseNames)))) $posts['case'] = Article::CASE_1;
+      if (isset ($posts['main_tag']) && !(is_string ($posts['main_tag']) && is_numeric ($posts['main_tag'] = trim ($posts['main_tag'])) && in_array ($posts['main_tag'], array_keys (Article::$mainTagNames)))) $posts['main_tag'] = Article::MAIN_TAG_1;
       if (isset ($posts['title']) && !(is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '「' . $this->title . '標題」格式錯誤！';
       if (isset ($posts['bio']) && !(is_string ($posts['bio']) && ($posts['bio'] = trim ($posts['bio'])))) return '「' . $this->title . '副標題」格式錯誤！';
       if (isset ($posts['date_at']) && !(is_string ($posts['date_at']) && is_date ($posts['date_at'] = trim ($posts['date_at'])))) return '「' . $this->title . '時間」格式錯誤！';
@@ -258,29 +258,5 @@ class Devs extends Admin_controller {
       return $this->output_error_json ('資料庫處理錯誤！');
 
     return $this->output_json ($obj->timeline == Article::TIMELINE_2);
-  }
-  public function caseon () {
-    $obj = $this->obj;
-
-    if (!$this->has_post ())
-      return $this->output_error_json ('非 POST 方法，錯誤的頁面請求。');
-
-    $posts = OAInput::post ();
-
-    $validation = function (&$posts) {
-      return !(isset ($posts['case']) && is_string ($posts['case']) && is_numeric ($posts['case'] = trim ($posts['case'])) && ($posts['case'] = $posts['case'] ? Article::CASE_2 : Article::CASE_1) && in_array ($posts['case'], array_keys (Article::$caseNames))) ? '「設定接案」發生錯誤！' : '';
-    };
-
-    if ($msg = $validation ($posts))
-      return $this->output_error_json ($msg);
-
-    if ($columns = array_intersect_key ($posts, $obj->table ()->columns))
-      foreach ($columns as $column => $value)
-        $obj->$column = $value;
-
-    if (!Article::transaction (function () use ($obj) { return $obj->save (); }))
-      return $this->output_error_json ('資料庫處理錯誤！');
-
-    return $this->output_json ($obj->case == Article::CASE_2);
   }
 }

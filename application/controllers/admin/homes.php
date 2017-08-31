@@ -66,9 +66,9 @@ class Homes extends Admin_controller {
       return redirect_message (array ($this->uri_1, 'add'), array ('_fd' => '非 POST 方法，錯誤的頁面請求。'));
 
     $posts = OAInput::post ();
-    $posts['type'] = Article::TYPE_1;
-    $posts['case'] = Article::CASE_1;
     $posts['date_at'] = date ('Y-m-d');
+    $posts['type'] = Article::TYPE_1;
+    $posts['main_tag'] = Article::MAIN_TAG_1;
     $posts['timeline'] = Article::TIMELINE_1;
     $posts['content'] = OAInput::post ('content', false);
     $cover = OAInput::file ('cover');

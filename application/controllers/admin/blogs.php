@@ -77,7 +77,7 @@ class Blogs extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['type'] = Article::TYPE_4;
-    $posts['case'] = Article::CASE_1;
+    $posts['main_tag'] = Article::MAIN_TAG_1;
     $posts['content'] = OAInput::post ('content', false);
     $icon = OAInput::file ('icon');
     $cover = OAInput::file ('cover');

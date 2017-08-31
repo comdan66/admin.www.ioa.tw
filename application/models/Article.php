@@ -32,12 +32,20 @@ class Article extends OaModel {
     self::TIMELINE_2 => '要',
   );
 
-  const CASE_1 = 1;
-  const CASE_2 = 2;
+  const MAIN_TAG_1 = 1;
+  const MAIN_TAG_2 = 2;
+  const MAIN_TAG_3 = 3;
+  const MAIN_TAG_4 = 4;
+  const MAIN_TAG_5 = 5;
+  const MAIN_TAG_6 = 6;
 
-  static $caseNames = array (
-    self::CASE_1 => '不是',
-    self::CASE_2 => '是',
+  static $mainTagNames = array (
+    self::MAIN_TAG_1 => '',
+    self::MAIN_TAG_2 => '接案',
+    self::MAIN_TAG_3 => '後端',
+    self::MAIN_TAG_4 => 'iOS',
+    self::MAIN_TAG_5 => '前端',
+    self::MAIN_TAG_6 => '其他',
   );
 
   const STATUS_1 = 1;

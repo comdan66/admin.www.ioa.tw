@@ -20,12 +20,15 @@
       </label>
     </div>
 
-    <div class='row min'>
-      <b class='need'>是否為接案</b>
-      <label class='switch'>
-        <input type='checkbox' name='case'<?php echo (isset ($posts['case']) ? $posts['case'] : $obj->case) == Article::CASE_2 ? ' checked' : '';?> value='<?php echo Article::CASE_2;?>' />
-        <span></span>
-      </label>
+    <div class='row'>
+      <b class='need'>類別</b>
+      <select name='main_tag'>
+  <?php if ($main_tags = Article::$mainTagNames) {
+          foreach ($main_tags as $key => $main_tag) { ?>
+            <option value='<?php echo $key;?>'<?php echo (isset ($posts['main_tag']) ? $posts['main_tag'] : $obj->main_tag) == $key ? ' selected' : '';?>><?php echo  $main_tag ? $main_tag : '無';?></option>
+    <?php }
+        }?>
+      </select>
     </div>
 
     <div class='row'>

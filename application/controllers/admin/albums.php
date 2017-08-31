@@ -69,7 +69,7 @@ class Albums extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['type'] = Article::TYPE_6;
-    $posts['case'] = Article::CASE_1;
+    $posts['main_tag'] = Article::MAIN_TAG_1;
     $posts['content'] = OAInput::post ('content', false);
     $cover = OAInput::file ('cover');
     $images = OAInput::file ('images[]');
