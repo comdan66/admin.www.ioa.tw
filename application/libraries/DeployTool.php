@@ -23,7 +23,7 @@ class DeployTool {
 
     $tags = Tag::find ('all', array ('select' => 'id, name'));
 
-    $objs = Article::find ('all', array ('order' => 'id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_3, Article::STATUS_3)));
+    $objs = Article::find ('all', array ('order' => 'date_at DESC, id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_3, Article::STATUS_3)));
     write_file ($api . 'devs.json', json_encode (array_map (function ($obj) use ($tags) { return array_merge ($obj->getBackup (true), array (
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
@@ -33,7 +33,7 @@ class DeployTool {
     )); }, $objs)));
     @chmod ($api . 'devs.json', 0777);
     
-    $objs = Article::find ('all', array ('order' => 'id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_4, Article::STATUS_3)));
+    $objs = Article::find ('all', array ('order' => 'date_at DESC, id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_4, Article::STATUS_3)));
     write_file ($api . 'blogs.json', json_encode (array_map (function ($obj) use ($tags) { return array_merge ($obj->getBackup (true), array (
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
@@ -43,7 +43,7 @@ class DeployTool {
     )); }, $objs)));
     @chmod ($api . 'blogs.json', 0777);
     
-    $objs = Article::find ('all', array ('order' => 'id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_5, Article::STATUS_3)));
+    $objs = Article::find ('all', array ('order' => 'date_at DESC, id DESC', 'include' => array ('mappings', 'sources'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_5, Article::STATUS_3)));
     write_file ($api . 'unboxings.json', json_encode (array_map (function ($obj) use ($tags) { return array_merge ($obj->getBackup (true), array (
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
@@ -54,7 +54,7 @@ class DeployTool {
     @chmod ($api . 'unboxings.json', 0777);
 
     
-    $objs = Article::find ('all', array ('order' => 'id DESC', 'include' => array ('mappings', 'sources', 'images'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_6, Article::STATUS_3)));
+    $objs = Article::find ('all', array ('order' => 'date_at DESC, id DESC', 'include' => array ('mappings', 'sources', 'images'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_6, Article::STATUS_3)));
     write_file ($api . 'albums.json', json_encode (array_map (function ($obj) use ($tags) { return array_merge ($obj->getBackup (true), array (
       'tags' => ($tag_ids = column_array ($obj->mappings, 'tag_id')) ? array_map (function ($tag) {
         return $tag->getBackup ();
@@ -65,7 +65,7 @@ class DeployTool {
     )); }, $objs)));
     @chmod ($api . 'albums.json', 0777);
     
-    $objs = Article::find ('all', array ('order' => 'id DESC', 'include' => array ('mappings', 'sources', 'images'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_7, Article::STATUS_3)));
+    $objs = Article::find ('all', array ('order' => 'date_at DESC, id DESC', 'include' => array ('mappings', 'sources', 'images'), 'conditions' => array ('type = ? AND status = ?', Article::TYPE_7, Article::STATUS_3)));
     write_file ($api . 'stars.json', json_encode (array_map (function ($obj) use ($tags) { return array_merge ($obj->getBackup (true), array (
       'content' => preg_replace ('/alt=""/', 'alt="' . $obj->title . '"', preg_replace ('/alt=""\s+src="(https?:\/\/[a-zA-Z_0-9\.]*\/[a-zA-Z_0-9]*\/ckeditor_images\/name\/([0-9]*)\/([0-9]*)\/([0-9]*)\/([0-9]*)\/[a-zA-Z_0-9]*\.[^\"]*)"/', 'alt="" data-pvid="CkeditorImage-$2$3$4$5" src="$1"', $obj->content))
     )); }, $objs)));
