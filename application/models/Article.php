@@ -39,6 +39,7 @@ class Article extends OaModel {
   const MAIN_TAG_5 = 5;
   const MAIN_TAG_6 = 6;
   const MAIN_TAG_7 = 7;
+  const MAIN_TAG_8 = 8;
 
   static $mainTagNames = array (
     self::MAIN_TAG_1 => '',
@@ -48,6 +49,7 @@ class Article extends OaModel {
     self::MAIN_TAG_5 => '前端',
     self::MAIN_TAG_6 => '其他',
     self::MAIN_TAG_7 => '全端',
+    self::MAIN_TAG_8 => '開箱',
   );
 
   const STATUS_1 = 1;
