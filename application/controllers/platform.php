@@ -45,10 +45,12 @@ class Platform extends Site_controller {
   }
   
   public function fb_sign_in () {
-    if (!(Fb::login () && ($me = Fb::me ()) && ((isset ($me['name']) && ($name = $me['name'])) && (isset ($me['email']) && ($email = $me['email'])) && (isset ($me['id']) && ($fid = $me['id'])))))
+    if (!(($me = Fb::me ()) && ((isset ($me['name']) && ($name = $me['name'])) && (isset ($me['id']) && ($fid = $me['id'])))))
       return redirect_message (array ('login'), array ('_fd' => 'Facebook 登入錯誤，請通知程式設計人員!(1)'));
+    
+    $email = isset ($me['email']) ? $me['email'] : '';
 
-    if (!$user = User::find ('one', array ('conditions' => array ('fid = ?', $fid))))
+    if (!($user = User::find ('one', array ('conditions' => array ('fid = ?', $fid)))))
       if (!User::transaction (function () use (&$user, $fid, $name, $email) {
         return verifyCreateOrm ($user = User::create (array_intersect_key (array (
           'fid' => $fid,
@@ -57,10 +59,9 @@ class Platform extends Site_controller {
           'token' => token ($fid),
           'name' => $name,
           'email' => $email,
-          'cnt_login' => 0,
-          'logined_at' => date ('Y-m-d H:i:s'),
-        ), User::table ()->columns)));
-      })) return redirect_message (array ('login'), array ('_fd' => 'Facebook 登入錯誤，請通知程式設計人員!(2)'));
+        ), User::table ()->columns))) && $user->create_set ();
+      }))
+        return redirect_message (array ('login'), array ('_fd' => 'Facebook 登入錯誤，請通知程式設計人員!(2)'));
 
     $user->cnt_login += 1;
     $user->logined_at = date ('Y-m-d H:i:s');
