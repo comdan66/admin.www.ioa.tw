@@ -45,6 +45,9 @@ class Platform extends Site_controller {
   }
   
   public function fb_sign_in () {
+    echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" /><pre>';
+    var_dump(Fb::me ());
+    exit();
     if (!(($me = Fb::me ()) && ((isset ($me['name']) && ($name = $me['name'])) && (isset ($me['id']) && ($fid = $me['id'])))))
       return redirect_message (array ('login'), array ('_fd' => 'Facebook 登入錯誤，請通知程式設計人員!(1)'));
     
