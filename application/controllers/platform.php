@@ -23,9 +23,7 @@ class Platform extends Site_controller {
 
   public function ap_sign_in () {
     $posts = OAInput::post ();
-echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" /><pre>';
-var_dump(password('xxx1963!!'));
-exit();
+
     if (!(($account = $posts['account']) && ($password = $posts['password']) && is_string ($account) && ($account = trim ($account)) && is_string ($password) && ($password = trim ($password)) && ($password = password ($password))))
       return redirect_message (array ('login'), array ('_fd' => '帳密 登入錯誤，資訊錯誤!(1)', 'posts' => $posts));
 
